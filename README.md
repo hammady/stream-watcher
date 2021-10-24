@@ -12,7 +12,7 @@ docker build . -t stream-watcher:1
 ## Configure and Run
 
 ```bash
-docker run -it --rm \
+docker run -d \
     -e STREAM_METADATA_URL="https://control.internet-radio.com:2199/external/rpc.php?m=streaminfo.get&username=mnnexus" \
     -e WATCH_SLEEP_TIME_SECONDS=60 \
     -e TRACK_JSON_PATH=.data[0].song \
