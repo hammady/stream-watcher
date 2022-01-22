@@ -70,7 +70,7 @@ def watch_stream():
         except Exception as e:
             print("Error: {}".format(e))
         finally:
-            print("Sleeping for {} seconds...".format(sleep_time), flush=True)
+            print("Sleeping for {} seconds...".format(sleep_time))
             sleep(sleep_time)
 
 
