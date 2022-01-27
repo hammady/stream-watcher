@@ -10,6 +10,7 @@ from jsonpath_ng import parse
 # read environment variables
 url = environ['STREAM_METADATA_URL']
 sleep_time = int(environ.get('WATCH_SLEEP_TIME_SECONDS') or 60)
+exit_after = int(environ.get('EXIT_AFTER_SLEEP_COUNT') or 0)
 track_json_path = environ['TRACK_JSON_PATH']
 track_match_string = environ['TRACK_MATCH_STRING'].lower()
 smtp_host = environ['SMTP_HOST']
@@ -45,6 +46,7 @@ def watch_stream():
 
     jsonpath_expression = parse('${}'.format(track_json_path))
     found = False
+    sleeps = 1
 
     while True:
         try:
@@ -70,8 +72,12 @@ def watch_stream():
         except Exception as e:
             print("Error: {}".format(e))
         finally:
+            if exit_after > 0 and sleeps >= exit_after:
+                print("Exiting after {} sleeps".format(sleeps))
+                break
             print("Sleeping for {} seconds...".format(sleep_time))
             sleep(sleep_time)
+            sleeps += 1
 
 
 watch_stream()

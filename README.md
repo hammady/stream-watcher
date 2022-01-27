@@ -15,6 +15,7 @@ docker build . -t stream-watcher:1
 docker run -d \
     -e STREAM_METADATA_URL="https://control.internet-radio.com:2199/external/rpc.php?m=streaminfo.get&username=mnnexus" \
     -e WATCH_SLEEP_TIME_SECONDS=60 \
+    -e EXIT_AFTER_SLEEP_COUNT=100 \
     -e TRACK_JSON_PATH=.data[0].song \
     -e TRACK_MATCH_STRING=live \
     -e SMTP_HOST=smtp.gmail.com \
@@ -34,3 +35,5 @@ string for the first time, it will send an email using the configured SMTP serve
 to the list of emails: email1@example.com and email2@example.com.
 It will not send again unless the track has changed to a non-match then matches
 again, and so on.
+It will exit after it reaches `EXIT_AFTER_SLEEP_COUNT=100` sleeps (60 seconds each).
+Note that it will automatically restart. If set to 0 or unset, it will run forever.
