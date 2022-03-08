@@ -75,6 +75,9 @@ def watch_stream():
             if exit_after > 0 and sleeps >= exit_after:
                 print("Exiting after {} sleeps".format(sleeps))
                 break
+            # touch /tmp/healthz to declare the service healthy
+            with open('/tmp/healthz', 'w') as f:
+                f.write('1')
             print("Sleeping for {} seconds...".format(sleep_time))
             sleep(sleep_time)
             sleeps += 1

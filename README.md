@@ -37,3 +37,9 @@ It will not send again unless the track has changed to a non-match then matches
 again, and so on.
 It will exit after it reaches `EXIT_AFTER_SLEEP_COUNT=100` sleeps (60 seconds each).
 Note that it will automatically restart. If set to 0 or unset, it will run forever.
+
+## Health Check
+
+The Dockerfile contains a health check that will run every 20 seconds and will
+exit with a non-zero exit code if the container has not produced any output for
+the last 5 minutes. Make sure to choose a sleep time that is smaller than 5 minutes.

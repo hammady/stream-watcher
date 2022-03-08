@@ -9,4 +9,6 @@ ENV PYTHONUNBUFFERED=1
 
 COPY . .
 
+HEALTHCHECK --interval=20s --timeout=3s --start-period=5s --retries=3 CMD [ "/home/healthz.sh" ]
+
 CMD [ "/home/watch-stream.py" ]
