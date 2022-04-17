@@ -1,15 +1,19 @@
 # stream-watcher
 
+[![Docker](https://github.com/hammady/stream-watcher/workflows/Docker/badge.svg)](https://github.com/hammady/stream-watcher/actions/workflows/docker-build-push.yml)
+
 Watch a radio stream metadata URL and notify subscribers by email each time
 a matching track is observed.
 
-## Build
+## Development
+
+### Build
 
 ```bash
 docker build . -t stream-watcher:1
 ```
 
-## Configure and Run
+### Configure and Run
 
 ```bash
 docker run -d \
@@ -37,6 +41,12 @@ It will not send again unless the track has changed to a non-match then matches
 again, and so on.
 It will exit after it reaches `EXIT_AFTER_SLEEP_COUNT=100` sleeps (60 seconds each).
 Note that it will automatically restart. If set to 0 or unset, it will run forever.
+
+## Production
+
+GitHub actions are configured to build and push a docker image.
+Visit [the package page](https://github.com/hammady/stream-watcher/pkgs/container/stream-watcher)
+for more information.
 
 ## Health Check
 
